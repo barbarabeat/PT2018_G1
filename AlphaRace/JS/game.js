@@ -1,44 +1,114 @@
 var gameCanvas = document.createElement("canvas");
 var gameCanvasContext = gameCanvas.getContext("2d"); // Creating the Canvas
-
 gameCanvas.width = 800;
 gameCanvas.height = 600;
 document.getElementById('gameContainer').appendChild(gameCanvas); // Placing the Canvas
-gameCanvasContext.fillStyle = "#808080";
-gameCanvasContext.fillRect(0,0,800,600); // General background
-gameCanvasContext.fillStyle = "#B6ACAC";
-gameCanvasContext.fillRect(170,0,460,600); // Game-area background
-gameCanvasContext.fillStyle = "#FFFFFF";
-gameCanvasContext.fillRect(170,220,460,5); // Player 1's track
-gameCanvasContext.fillRect(170,340,460,5); // Player 2's track
+
+// Drawing the background
+function drawBackground() {
+	gameCanvasContext.fillStyle = "#808080";
+	gameCanvasContext.fillRect(0,0,800,600); // General background
+	gameCanvasContext.fillStyle = "#B6ACAC";
+	gameCanvasContext.fillRect(170,0,460,600); // Game-area background
+	gameCanvasContext.fillStyle = "#FFFFFF";
+	gameCanvasContext.fillRect(170,220,460,5); // Player 1's track
+	gameCanvasContext.fillRect(170,340,460,5); // Player 2's track
+}
 
 // Begginning to draw Player 1's Gauge
-gameCanvasContext.shadowBlur = 40;
-gameCanvasContext.shadowColor = "rgba(255,180,180,0.5)"; // Red aura
-gameCanvasContext.fillStyle = "#FFFFFF";
-gameCanvasContext.beginPath();
-gameCanvasContext.moveTo(45, 50);
-gameCanvasContext.lineTo(125,50);
-gameCanvasContext.arc(125,67,17,1.5*Math.PI,0.5*Math.PI);
-gameCanvasContext.lineTo(50,84);
-gameCanvasContext.arc(45,67,17,0.5*Math.PI,1.5*Math.PI);
-gameCanvasContext.fill();
-// End Player 1's Gauge
-// The Gauge is 80px + 34px long and 30px tall
+function drawGauges() {
+	gameCanvasContext.shadowBlur = 40;
+	gameCanvasContext.shadowColor = "rgba(255,180,180,0.5)"; // Red aura
+	gameCanvasContext.fillStyle = "#FFFFFF";
+	gameCanvasContext.beginPath();
+	gameCanvasContext.moveTo(45, 50);
+	gameCanvasContext.lineTo(125,50);
+	gameCanvasContext.arc(125,67,17,1.5*Math.PI,0.5*Math.PI);
+	gameCanvasContext.lineTo(50,84);
+	gameCanvasContext.arc(45,67,17,0.5*Math.PI,1.5*Math.PI);
+	/*
+	COLOR CODING GOES HERE
+	*/
+	gameCanvasContext.fill();
+	// End Player 1's Gauge
+	// The Gauge is 80px + 34px long and 30px tall
 
-// Begginning to draw Player 2's Gauge
-gameCanvasContext.shadowBlur = 40;
-gameCanvasContext.shadowColor = "rgba(180,180,255,0.5)"; // Blue aura
-gameCanvasContext.fillStyle = "#FFFFFF";
-gameCanvasContext.beginPath();
-gameCanvasContext.moveTo(675,50)
-gameCanvasContext.lineTo(755,50);
-gameCanvasContext.arc(755,67,17,1.5*Math.PI,0.5*Math.PI);
-gameCanvasContext.lineTo(675,84);
-gameCanvasContext.arc(675,67,17,0.5*Math.PI,1.5*Math.PI);
-gameCanvasContext.fill();
-// End Player 2's Gauge
-// The Gauge is 80px + 34px long and 30px tall
+	// Begginning to draw Player 2's Gauge
+	gameCanvasContext.shadowBlur = 40;
+	gameCanvasContext.shadowColor = "rgba(180,180,255,0.5)"; // Blue aura
+	gameCanvasContext.fillStyle = "#FFFFFF";
+	gameCanvasContext.beginPath();
+	gameCanvasContext.moveTo(675,50)
+	gameCanvasContext.lineTo(755,50);
+	gameCanvasContext.arc(755,67,17,1.5*Math.PI,0.5*Math.PI);
+	gameCanvasContext.lineTo(675,84);
+	gameCanvasContext.arc(675,67,17,0.5*Math.PI,1.5*Math.PI);
+	/*
+	COLOR CODING GOES HERE
+	*/
+	gameCanvasContext.fill();
+	// End Player 2's Gauge
+	// The Gauge is 80px + 34px long and 30px tall
+}
+
+// Begginning to draw Player 1's Oscilator
+var oscilator1 = {
+	x: 29,
+	y: 46,
+	width: 3,
+	height:42,
+	gear: 0
+};
+
+function drawOscilator1() {
+	gameCanvasContext.shadowBlur = 0;
+	gameCanvasContext.fillStyle = "#333333";
+	gameCanvasContext.fillRect(oscilator1.x, oscilator1.y, oscilator1.width, oscilator1.height);
+}
+
+function oscilateOscilator1() {
+	if (oscilator1.gear == 0) {
+		oscilator1.x++;
+		if (oscilator1.x == 139) {
+			oscilator1.gear = 1;
+		}
+	}
+	else {
+		oscilator1.x--;
+		if (oscilator1.x == 29) {
+			oscilator1.gear = 0;
+		}
+	}
+}
+
+var oscilator2 = {
+	x: 659,
+	y: 46,
+	width: 3,
+	height:42,
+	gear: 0
+};
+
+function drawOscilator2() {
+	gameCanvasContext.shadowBlur = 0;
+	gameCanvasContext.fillStyle = "#333333";
+	gameCanvasContext.fillRect(oscilator2.x, oscilator2.y, oscilator2.width, oscilator2.height);
+}
+
+function oscilateOscilator2() {
+	if (oscilator2.gear == 0) {
+		oscilator2.x++;
+		if (oscilator2.x == 769) {
+			oscilator2.gear = 1;
+		}
+	}
+	else {
+		oscilator2.x--;
+		if (oscilator2.x == 659) {
+			oscilator2.gear = 0;
+		}
+	}
+}
 
 // End Canvas' Drawings
 
@@ -55,7 +125,7 @@ function startGame() {
 	if (gameStarted == 0) {
 		gameStarted = 1;
 		startTime = new Date();
-		setInterval(gameLoop, 16);
+		setInterval(gameLoop, 5);
 	}
 	else {
 		alert("Game has already started!")
@@ -81,7 +151,20 @@ function updateElapsedTimeDisplay() {
 	}
 }
 
+// Initializing necessary functions and stating game loop
+
+drawBackground();
+drawGauges();
+drawOscilator1();
+drawOscilator2();
 function gameLoop() {
+	gameCanvasContext.shadowBlur = 0
+	drawBackground();
+	drawGauges();
 	calculateElapsedTime();
 	updateElapsedTimeDisplay();
+	drawOscilator1();
+	oscilateOscilator1();
+	drawOscilator2();
+	oscilateOscilator2();
 }
