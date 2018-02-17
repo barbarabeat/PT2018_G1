@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title> Alpha Junior Trainee Project - Bárbara & Léo </title>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+		<link rel="stylesheet" href="../CSS/game.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1s.0">
+	</head>
+
+	<body>
+		<header class="jumbotron">
+			Alpha Race - v0.1
+		</header>
+		<main id="gameContainer">
+			<script type="text/javascript" src="../JS/game.js"> </script>
+            <span id="foo">
+			<span id="timeElapsedText">Time Elapsed:<br><span id="timeElapsedClock">00:00</span></span> <!-- Time Elapsed on the bottom-left corner. The clock should receive a JS script counting in seconds:miliseconds once Start is pressed -->
+			<button type="button" id="gameStartButton" class="btn btn-success gameButton" onclick="startGame()"> START </button> <!-- Start button on the bottom-left corner. -->
+			<span id="gameStartText">Click or press Enter<br>to start </span> <!-- Start button's info text -->
+			<button type="button" id="leaderboardButton" class="btn btn-info gameButton"> See Leaderboards </button> <!-- Leaderboard button -->
+			<span id="roundResults"> This round's results:<br><span id="player1Results">Player 1 finished in: 10.29 secs</span><br><span id="player2Results">Player 2 finished in: 15.20 secs</span></span> <!-- Round's results text -->
+			</span>
+		</main>
+		<img  id="imgUp" src="../Images/arquibancadaUso.png">
+		<img id="imgDown" src="../Images/embaixoPronto.png">
+	</body>
+
+</html>
